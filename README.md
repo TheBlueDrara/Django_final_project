@@ -6,7 +6,7 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 
 # Flow
 
-- Make the webapp work locally, DOD - a working webapp with a database 
+- Make the webapp work locally, DOD - a working webapp with a database (use a Postgress DB and Docker compose)
 - Containerize the app with the DB as a docker compose
 - Create a CI to test and build a new docker image artifact
 - Create a k8s cluster using my k8s offline installer project
