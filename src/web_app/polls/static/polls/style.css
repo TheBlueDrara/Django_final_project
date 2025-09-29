@@ -1,3 +1,8 @@
+
+body {
+    background: rgb(211, 57, 57) url("/static/polls/images/background.png") no-repeat;
+}
+
 li a {
-    color: green;
+    color: rgb(255, 251, 0);
 }
