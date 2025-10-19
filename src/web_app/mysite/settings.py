@@ -66,8 +66,8 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "Vox_Servitor_Ordo_Database",
         "USER": "Omnissiah",
-        "PASSWORD": "40000",
-        "HOST": "172.17.0.2",
+        "PASSWORD": "ninja",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
