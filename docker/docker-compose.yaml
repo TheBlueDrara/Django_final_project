@@ -31,5 +31,11 @@ services:
       db:
         condition: service_healthy
 
+  nginx:
+    image: nginx
+    container_name: reverse_proxy
+    ports:
+      - "80:80"
+
 volumes:
   pg_data:
