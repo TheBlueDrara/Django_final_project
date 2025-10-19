@@ -1,5 +1,20 @@
 
 services:
+  db:
+    image: postgres:16-bookworm
+    container_name: Machine_Anima
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: Omnissiah
+      POSTGRES_PASSWORD: "ninja"
+      POSTGRES_DB: Vox_Servitor_Ordo_Database
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h 127.0.0.1 || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
   web:
     build:
       context: ../
@@ -8,16 +23,7 @@ services:
     container_name: The_Sigil_of_Judgment
     ports:
       - "8000:8000"
+    command: bash -c "python manage.py migrate && gunicorn mysite.wsgi:application -c config/gunicorn_conf.py"
     depends_on:
-      - db
-
-  db:
-    image: postgres:16-bookworm
-    container_name: Machine_Anima
-    environment:
-      POSTGRES_USER: Omnissiah
-      POSTGRES_PASSWORD: "ninja"
-      POSTGRES_DB: Vox_Servitor_Ordo_Database
-    ports:
-      - "5432:5432"
-    
+      db:
+        condition: service_healthy
