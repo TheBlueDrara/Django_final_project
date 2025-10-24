@@ -1,0 +1,15 @@
+include:
+  - local: '.gitlab-ci-dev.yml'
+    rules:
+      - if: '$CI_COMMIT_BRANCH == "dev"'
+  - local: '.gitlab-ci-main.yml'
+    rules:
+      - if: '$CI_COMMIT_BRANCH == "main"'
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+    - when: never
+
+
