@@ -1,0 +1,35 @@
+# Details app deployment values
+
+detailsApp:
+  name: details-app
+  image: thebluedrara/details_app:1
+  port: 5000
+  replicas: 3
+
+# Nginx deployment values
+
+nginx:
+  name: nginx
+  image: nginx:latest
+  port: 80
+  replicas: 3
+  volumeMount:
+    mountPath: /etc/nginx/conf.d/default.conf
+    subPath: default.conf
+    configMapName: nginx-config
+    
+  config: |
+    server {
+      listen 80;
+      server_name localhost;
+
+      location / {
+        proxy_pass http://details-app:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+      }
+    }
+
