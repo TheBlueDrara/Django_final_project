@@ -1,6 +1,6 @@
 
 services:
-  postgress:
+  postgres:
     image: postgres:16-bookworm
     container_name: Machine_Spirit
     ports:
@@ -28,7 +28,7 @@ services:
       - "8000:8000"
     command: bash -c "python manage.py migrate && gunicorn mysite.wsgi:application -c config/gunicorn_conf.py"
     depends_on:
-      postgress:
+      postgres:
         condition: service_healthy
 
   nginx:

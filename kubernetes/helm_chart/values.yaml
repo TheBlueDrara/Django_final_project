@@ -32,8 +32,8 @@ nginx:
         }
     }
 
-postgress:
-  name: postgress
+postgres:
+  name: postgres
   image: postgres:16-bookworm
   port: 5432
   replicas: 3

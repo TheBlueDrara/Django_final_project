@@ -26,3 +26,4 @@ spec:
           configMap:
             name: {{ .Values.nginx.volumeMount.configMapName }}
 
+# Add an initContainer in the Nginx Deployment that loops until it can reach the Web_app Service

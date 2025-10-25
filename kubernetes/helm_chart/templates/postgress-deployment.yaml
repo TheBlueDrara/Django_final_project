@@ -1,20 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.vote_app.name }}
+  name: {{ .Values.postgres.name }}
 spec:
-  replicas: {{ .Values.vote_app.replicas }}
+  replicas: {{ .Values.postgres.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.vote_app.name }}
+      app: {{ .Values.postgres.name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.vote_app.name }}
+        app: {{ .Values.postgres.name }}
     spec:
       containers:
-        - name: {{ .Values.vote_app.name }}
-          image: {{ .Values.vote_app.image }}
+        - name: {{ .Values.postgres.name }}
+          image: {{ .Values.postgres.image }}
           ports:
-            - containerPort: {{ .Values.vote_app.port }}
+            - containerPort: {{ .Values.postgres.port }}
 
+# ADD Secret resoruce for the db credentials
+# ADD PersistentVolume PersistentVolumeClaim to make the data saved somewhere ( use NFS StorageType )
+# ADD a service so DB will be reacable ClusterIP
+# Replace the deployment with StatefulSet

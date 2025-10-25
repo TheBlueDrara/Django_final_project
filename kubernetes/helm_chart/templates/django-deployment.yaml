@@ -18,3 +18,5 @@ spec:
           ports:
             - containerPort: {{ .Values.vote_app.port }}
 
+# ADD an InitContainer that will loop until it can reach the DB service
+# ADD a command to Migrate the static DB info to the DB when service is up 
