@@ -67,7 +67,7 @@ DATABASES = {
         "NAME": "Vox_Servitor_Ordo_Database",
         "USER": "Omnissiah",
         "PASSWORD": "ninja",
-        "HOST": "db",
+        "HOST": "postgress",
         "PORT": "5432",
     }
 }
