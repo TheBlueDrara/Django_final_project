@@ -1,6 +1,6 @@
 vote_app:
   name: vote-app
-  image: thebluedrara/details_app:1
+  image: thebluedrara/vote_app:v1.0
   port: 8000
   replicas: 3
 
