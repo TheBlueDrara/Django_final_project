@@ -1,16 +1,12 @@
-# Details app deployment values
-
-detailsApp:
-  name: details-app
+vote_app:
+  name: vote-app
   image: thebluedrara/details_app:1
-  port: 5000
+  port: 8000
   replicas: 3
-
-# Nginx deployment values
 
 nginx:
   name: nginx
-  image: nginx:latest
+  image: nginx:1.29
   port: 80
   replicas: 3
   volumeMount:
@@ -20,16 +16,19 @@ nginx:
     
   config: |
     server {
-      listen 80;
-      server_name localhost;
+        listen 80;
+        server_name _;
 
-      location / {
-        proxy_pass http://details-app:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-      }
+        location / {
+            proxy_pass http://web:8000;
+            proxy_set_header Host $http_host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Host $http_host;
+            proxy_redirect off;
+            proxy_connect_timeout 5s;
+            proxy_read_timeout 30s;
+        }
     }
 

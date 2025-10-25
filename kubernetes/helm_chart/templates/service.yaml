@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.detailsApp.name }}
+  name: {{ .Values.vote_app.name }}
 spec:
   selector:
-    app: {{ .Values.detailsApp.name }}
+    app: {{ .Values.vote_app.name }}
   ports:
     - name: http
-      port: {{ .Values.detailsApp.port }}
-      targetPort: {{ .Values.detailsApp.port }}
+      port: {{ .Values.vote_app.port }}
+      targetPort: {{ .Values.vote_app.port }}
   type: ClusterIP
 ---
 apiVersion: v1
@@ -23,4 +23,3 @@ spec:
       port: {{ .Values.nginx.port }}
       targetPort: {{ .Values.nginx.port }}
   type: NodePort
-
