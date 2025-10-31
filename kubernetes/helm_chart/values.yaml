@@ -1,7 +1,7 @@
 vote_app:
   name: the-sigil-of-judgment
   serviceName: app-service
-  image: thebluedrara/vote_app:v2.1
+  image: thebluedrara/faithbound-legion:v2.2
   imagePullPolicy: Always
   port: 8000
   replicas: 3
