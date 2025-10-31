@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: "bla"
       POSTGRES_DB: "Servitor_ninja"
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data_volume:/var/lib/postgresql/data
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB} -h 127.0.0.1 || exit 1"]
@@ -42,4 +42,4 @@ services:
       - vote_app
 
 volumes:
-  pg_data:
+  pg_data_volume:
