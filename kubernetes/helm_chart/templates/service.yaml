@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.vote_app.name }}
+  name: {{ .Values.vote_app.serviceName }}
 spec:
   selector:
-    app: {{ .Values.vote_app.name }}
+    app: {{ .Values.vote_app.serviceName }}
   ports:
     - name: http
       port: {{ .Values.vote_app.port }}
@@ -14,10 +14,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.nginx.name }}
+  name: {{ .Values.nginx.serviceName }}
 spec:
   selector:
-    app: {{ .Values.nginx.name }}
+    app: {{ .Values.nginx.serviceName }}
   ports:
     - name: http
       port: {{ .Values.nginx.port }}
@@ -27,10 +27,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.postgres.name }}
+  name: {{ .Values.postgres.serviceName }}
 spec:
   selector:
-    app: {{ .Values.postgres.name }}
+    app: {{ .Values.postgres.serviceName }}
   ports:
     - name: http
       port: {{ .Values.postgres.port }}
