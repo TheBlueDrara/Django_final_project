@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.vote_app.serviceName }}
 spec:
   selector:
-    app: {{ .Values.vote_app.serviceName }}
+    app: {{ .Values.vote_app.name }}
   ports:
     - name: http
       port: {{ .Values.vote_app.port }}
@@ -17,7 +17,7 @@ metadata:
   name: {{ .Values.nginx.serviceName }}
 spec:
   selector:
-    app: {{ .Values.nginx.serviceName }}
+    app: {{ .Values.nginx.name }}
   ports:
     - name: http
       port: {{ .Values.nginx.port }}
@@ -30,7 +30,7 @@ metadata:
   name: {{ .Values.postgres.serviceName }}
 spec:
   selector:
-    app: {{ .Values.postgres.serviceName }}
+    app: {{ .Values.postgres.name }}
   ports:
     - name: http
       port: {{ .Values.postgres.port }}
