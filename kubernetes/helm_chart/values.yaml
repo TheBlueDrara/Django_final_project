@@ -1,5 +1,5 @@
 vote_app:
-  name: The_Sigil_of_Judgment
+  name: the-sigil-of-judgment
   serviceName: app-service
   image: thebluedrara/vote_app:v2.1
   imagePullPolicy: Always
@@ -36,7 +36,7 @@ nginx:
     }
 
 postgres:
-  name: Machine_Spirit
+  name: machine-spirit
   image: postgres:16-bookworm
   port: 5432
   replicas: 1
