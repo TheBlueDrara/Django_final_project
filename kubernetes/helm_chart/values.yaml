@@ -42,7 +42,7 @@ postgres:
   replicas: 1
   serviceName: postgres-service
   configMapName: configmap-postgres
-  seacretName: postgres-secret
+  secretName: postgres-secret
   envSecret:
     POSTGRES_USER: "Omnissiah"
     POSTGRES_DB: "Servitor_ninja"
