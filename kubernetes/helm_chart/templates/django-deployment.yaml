@@ -12,6 +12,13 @@ spec:
       labels:
         app: {{ .Values.vote_app.name }}
     spec:
+      initContainers:
+        - name: wait-for-db
+          image: curlimages/curl:8.10.1
+          command: ["sh", "-c"]
+          args:
+            - |
+              URL='{{ "http://<Service_Name>:5432/polls" }}'
       containers:
         - name: {{ .Values.vote_app.name }}
           image: {{ .Values.vote_app.image }}

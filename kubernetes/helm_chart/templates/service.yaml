@@ -23,3 +23,19 @@ spec:
       port: {{ .Values.nginx.port }}
       targetPort: {{ .Values.nginx.port }}
   type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.postgres.name }}
+spec:
+  selector:
+    app: {{ .Values.postgres.name }}
+  ports:
+    - name: http
+      port: {{ .Values.postgres.port }}
+      targetPort: {{ .Values.postgres.port }}
+  type: ClusterIP
+
+
+# add to nginx a service type of lb or egress ( ingress )

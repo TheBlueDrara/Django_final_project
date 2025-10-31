@@ -17,22 +17,14 @@ spec:
           image: {{ .Values.postgres.image }}
           ports:
             - containerPort: {{ .Values.postgres.port }}
-          Env_Variables:
-            - configmap:
+          envFrom:
+            - configMapRef:
                 name: {{ .Values.postgres.configMapName }}
             - secretRef:
-                name: {{ .Values.postgres.seacretName }}
-          readinessProbe:
-            exec:
-              command: ["pg_isready","-U","$(POSTGRES_USER)","-d","$(POSTGRES_DB)"]
-            initialDelaySeconds: 5
-            periodSeconds: 5
+                name: {{ .Values.postgres.secretName }}
 
 
-# ADD Secret resoruce for the db credentials
-# ADD PersistentVolume PersistentVolumeClaim to make the data saved somewhere ( use NFS StorageType )
+
 # ADD a service so DB will be reacable ClusterIP
-# Replace the deployment with StatefulSet
 
 
-# pass a seacret via configmap as a env variable
