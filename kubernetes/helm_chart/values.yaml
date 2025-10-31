@@ -1,7 +1,7 @@
 vote_app:
   name: The_Sigil_of_Judgment
   serviceName: app-service
-  image: thebluedrara/vote_app:latest
+  image: thebluedrara/vote_app:v2.1
   imagePullPolicy: Always
   port: 8000
   replicas: 3
