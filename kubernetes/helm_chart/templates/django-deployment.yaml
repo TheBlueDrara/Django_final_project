@@ -30,7 +30,10 @@ spec:
       containers:
         - name: {{ .Values.vote_app.name }}
           image: {{ .Values.vote_app.image }}
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.vote_app.port }}
-
-# ADD a command to Migrate the static DB info to the DB when service is up 
+          command: ["bash","-c"]
+          args:
+            - |
+              python manage.py migrate && gunicorn mysite.wsgi:application -c config/gunicorn_conf.py

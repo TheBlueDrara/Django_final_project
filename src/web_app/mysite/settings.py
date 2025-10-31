@@ -67,7 +67,7 @@ DATABASES = {
         "NAME": "Servitor_ninja",
         "USER": "Omnissiah",
         "PASSWORD": "bla",
-        "HOST": "postgress",
+        "HOST": "postgres",
         "PORT": "5432",
     }
 }

@@ -6,9 +6,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: Omnissiah
-      POSTGRES_PASSWORD: "ninja"
-      POSTGRES_DB: Servitor_ID0978
+      POSTGRES_USER: "Omnissiah"
+      POSTGRES_PASSWORD: "bla"
+      POSTGRES_DB: "Servitor_ninja"
     volumes:
       - pg_data:/var/lib/postgresql/data
 

@@ -1,11 +1,14 @@
 vote_app:
-  name: vote-app
-  image: thebluedrara/vote_app:v1.0
+  name: The_Sigil_of_Judgment
+  serviceName: app-service
+  image: thebluedrara/vote_app:latest
+  imagePullPolicy: Always
   port: 8000
   replicas: 3
 
 nginx:
   name: nginx
+  serviceName: nginx-service
   image: nginx:1.29
   port: 80
   replicas: 3
@@ -33,7 +36,7 @@ nginx:
     }
 
 postgres:
-  name: postgres
+  name: Machine_Spirit
   image: postgres:16-bookworm
   port: 5432
   replicas: 1
