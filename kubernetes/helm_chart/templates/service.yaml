@@ -16,10 +16,9 @@ kind: Service
 metadata:
   name: {{ .Values.nginx.serviceName }}
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
-    app: {{ .Values.postgres.name }}
-    nginx: {{ .Values.nginx.name }}
+    app: {{ .Values.nginx.name }}
   ports:
     - name: http
       port: {{ .Values.nginx.port }}
