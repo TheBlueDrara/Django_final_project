@@ -36,5 +36,10 @@ postgres:
   name: postgres
   image: postgres:16-bookworm
   port: 5432
-  replicas: 3
-  
+  replicas: 1
+  configMapName: configmap-postgres
+  seacretName: postgres-secret
+  envSecret:
+    POSTGRES_USER: "Omnissiah"
+    POSTGRES_DB: "Servitor_ninja"
+    POSTGRES_PASSWORD: "bla"

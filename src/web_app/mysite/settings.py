@@ -64,9 +64,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Vox_Servitor_Ordo_Database",
+        "NAME": "Servitor_ninja",
         "USER": "Omnissiah",
-        "PASSWORD": "ninja",
+        "PASSWORD": "bla",
         "HOST": "postgress",
         "PORT": "5432",
     }
