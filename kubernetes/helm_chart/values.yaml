@@ -46,4 +46,4 @@ postgres:
   envSecret:
     POSTGRES_USER: "Omnissiah"
     POSTGRES_DB: "Servitor_ninja"
-    POSTGRES_PASSWORD: "Ymxh" 
+    POSTGRES_PASSWORD: "Ymxh"

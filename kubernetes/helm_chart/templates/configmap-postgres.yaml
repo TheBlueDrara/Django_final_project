@@ -5,3 +5,4 @@ metadata:
 data:
   POSTGRES_USER: {{ .Values.postgres.envSecret.POSTGRES_USER }}
   POSTGRES_DB: {{ .Values.postgres.envSecret.POSTGRES_DB }}
+  DB_HOST: {{ .Values.postgres.serviceName }}

@@ -33,6 +33,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.vote_app.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.postgres.configMapName }}
+            - secretRef:
+                name: {{ .Values.postgres.secretName }}
           command: ["bash","-c"]
           args:
             - |
