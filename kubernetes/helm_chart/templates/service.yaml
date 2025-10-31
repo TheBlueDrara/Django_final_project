@@ -3,39 +3,40 @@ kind: Service
 metadata:
   name: {{ .Values.vote_app.serviceName }}
 spec:
+  type: ClusterIP
   selector:
     app: {{ .Values.vote_app.name }}
   ports:
     - name: http
       port: {{ .Values.vote_app.port }}
       targetPort: {{ .Values.vote_app.port }}
-  type: ClusterIP
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.nginx.serviceName }}
 spec:
+  type: ClusterIP
   selector:
-    app: {{ .Values.nginx.name }}
+    app: {{ .Values.postgres.name }}
+    nginx: {{ .Values.nginx.name }}
   ports:
     - name: http
       port: {{ .Values.nginx.port }}
       targetPort: {{ .Values.nginx.port }}
-  type: NodePort
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.postgres.serviceName }}
 spec:
+  type: ClusterIP
   selector:
     app: {{ .Values.postgres.name }}
   ports:
     - name: http
       port: {{ .Values.postgres.port }}
       targetPort: {{ .Values.postgres.port }}
-  type: ClusterIP
 
 
 # add to nginx a service type of lb or egress ( ingress )
