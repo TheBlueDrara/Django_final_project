@@ -3,6 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.postgres.configMapName }}
 data:
-  {{ .Values.postgres.envSecret.POSTGRES_USER }}
-  {{ .Values.postgres.envSecret.POSTGRES_DB }}
-  {{ .Values.postgres.envSecret.POSTGRES_PASSWORD }}
+  POSTGRES_USER: {{ .Values.postgres.envSecret.POSTGRES_USER }}
+  POSTGRES_DB: {{ .Values.postgres.envSecret.POSTGRES_DB }}
