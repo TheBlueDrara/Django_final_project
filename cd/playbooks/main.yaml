@@ -1,0 +1,20 @@
+- name: Deploy Control Plane
+  hosts: control_plane
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: ../roles/control_plane
+
+- name: Deploy Worker Nodes
+  hosts: workers
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: ../roles/worker
+
+- name: Install on Helm Control Plane
+  hosts: control_plane
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: ../roles/helm
