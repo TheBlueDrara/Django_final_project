@@ -1,0 +1,6 @@
+- name: install helm
+  shell: |
+    kubectl create namespace prod
+    kubectl create namespace test
+  args:
+    executable: /bin/bash

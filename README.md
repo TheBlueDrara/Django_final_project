@@ -64,7 +64,7 @@ install the production helm chart
 ```
 cd vagrant
 vagrant global-status
-vagrant ssh <control_plane_ID>
+vagrant ssh control_plane
 git clone https://github.com/TheBlueDrara/Django_final_project.git
 cd Django_final_project/kubernetes/production_helm_chart
 helm install prod-voteapp .
