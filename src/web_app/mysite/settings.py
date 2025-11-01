@@ -66,13 +66,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "Servitor_ninja"),
-        "USER": os.getenv("DB_USER", "Omnissiah"),
-        "PASSWORD": os.getenv("DB_PASSWORD", "bla"),
-        "HOST": os.getenv("DB_HOST", "postgres"),
-        "PORT": os.getenv("DB_PORT", "5432"),
+        "NAME": os.getenv("POSTGRES_DB", "Servitor_ninja"),
+        "USER": os.getenv("POSTGRES_USER", "Omnissiah"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "bla"),
+        "HOST": os.getenv("serviceName", "postgres"),
+        "PORT": os.getenv("POSTGRES_PORT", "5432"),
     }
 }
+
 
 
 # Password validation
