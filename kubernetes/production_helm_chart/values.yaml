@@ -1,23 +1,23 @@
 namespace: prod
 
 vote_app:
-  name: the-sigil-of-judgment
-  serviceName: app-service
+  name: prod-the-sigil-of-judgment
+  serviceName: prod-app-service
   image: thebluedrara/faithbound-legion:v2.3
   imagePullPolicy: Always
   port: 8000
   replicas: 3
 
 nginx:
-  name: nginx
-  serviceName: nginx-service
+  name: prod-nginx
+  serviceName: prod-nginx-service
   image: nginx:1.29
   port: 80
   replicas: 3
   volumeMount:
     mountPath: /etc/nginx/conf.d/default.conf
     subPath: default.conf
-    configMapName: nginx-config
+    configMapName: prod-nginx-config
   nodePort: 30080
     
   config: |
@@ -41,14 +41,14 @@ nginx:
     }
 
 postgres:
-  name: machine-spirit
+  name: prod-machine-spirit
   image: postgres:16-bookworm
   port: 5432
   replicas: 1
-  serviceName: postgres-service
-  configMapName: configmap-postgres
-  secretName: postgres-secret
+  serviceName: prod-postgres-service
+  configMapName: prod-configmap-postgres
+  secretName: prod-postgres-secret
   envSecret:
-    POSTGRES_USER: "Omnissiah"
-    POSTGRES_DB: "Servitor_ninja"
-    POSTGRES_PASSWORD: "Ymxh"
+    POSTGRES_USER: "prod-Omnissiah"
+    POSTGRES_DB: "prod-Servitor_ninja"
+    POSTGRES_PASSWORD: "cHJvZC1ibGE="
