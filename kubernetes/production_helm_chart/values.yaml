@@ -1,4 +1,4 @@
-namespace: testing
+namespace: prod
 
 vote_app:
   name: the-sigil-of-judgment

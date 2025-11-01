@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.vote_app.serviceName }}
+  namespace: {{ .Values.namespace }}
 spec:
   type: ClusterIP
   selector:
@@ -15,6 +16,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.nginx.serviceName }}
+  namespace: {{ .Values.namespace }}
 spec:
   type: NodePort
   selector:
@@ -23,11 +25,13 @@ spec:
     - name: http
       port: {{ .Values.nginx.port }}
       targetPort: {{ .Values.nginx.port }}
+      nodePort: {{ .Values.nginx.nodePort }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.postgres.serviceName }}
+  namespace: {{ .Values.namespace }}
 spec:
   type: ClusterIP
   selector:
