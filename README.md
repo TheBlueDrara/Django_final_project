@@ -15,7 +15,12 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 - Will be used a multibranch monorepo for source control in GitHub
 
 
-
+## Prerequsists
+- Vagrant
+- Qemu
+- Libvert
+- Ansible
+- Makeself
 
 ## Setup flow
 
