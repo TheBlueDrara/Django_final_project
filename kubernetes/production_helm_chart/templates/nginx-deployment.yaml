@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.nginx.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.nginx.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.nginx.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.nginx.name }}
+    spec:
+      initContainers:
+        - name: wait-for-web
+          image: busybox:1.36
+          command: ["sh","-c"]
+          args:
+            - |
+              echo "Waiting for app-service:8000 ..."
+              until nc -z {{ .Values.vote_app.serviceName }}:{{ .Values.vote_app.port}} ; do
+              echo "Not ready yet. Sleeping..."
+              sleep 2
+              done
+              echo "Web app is up."
+      containers:
+        - name: {{ .Values.nginx.name }}
+          image: {{ .Values.nginx.image }}
+          ports:
+            - containerPort: {{ .Values.nginx.port }}
+          volumeMounts:
+            - name: {{ .Values.nginx.volumeMount.configMapName }}
+              mountPath: {{ .Values.nginx.volumeMount.mountPath }}
+              subPath: {{ .Values.nginx.volumeMount.subPath }}
+      volumes:
+        - name: {{ .Values.nginx.volumeMount.configMapName }}
+          configMap:
+            name: {{ .Values.nginx.volumeMount.configMapName }}
+
+# Add an initContainer in the Nginx Deployment that loops until it can reach the Web_app Service

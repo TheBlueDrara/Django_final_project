@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.vote_app.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.vote_app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.vote_app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.vote_app.name }}
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: postgres:16-bookworm
+          command: ["bash","-c"]
+          args:
+            - |
+              echo "Waiting for Postgres at {{ .Values.postgres.serviceName }}:{{ .Values.postgres.port }}..."
+              until pg_isready \
+                -h {{ .Values.postgres.serviceName }} \
+                -p {{ .Values.postgres.port }} \
+                -d {{ .Values.postgres.envSecret.POSTGRES_DB }}; do
+                echo "Postgres not ready yet. Sleeping..."
+                sleep 2
+              done
+              echo "Postgres is ready."
+      containers:
+        - name: {{ .Values.vote_app.name }}
+          image: {{ .Values.vote_app.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ .Values.vote_app.port }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.postgres.configMapName }}
+            - secretRef:
+                name: {{ .Values.postgres.secretName }}
+          command: ["bash","-c"]
+          args:
+            - |
+              python manage.py migrate && gunicorn mysite.wsgi:application -c config/gunicorn_conf.py
