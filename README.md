@@ -79,3 +79,15 @@ or
 http://192.168.56.11:30081
 ```
 Done
+
+
+
+
+# Weaknes 
+- Part of the CI is to run the helm chart with the new built image, ( need to change the image tag in the values file )
+- Need to install helm on VMs
+- No ingress so to reach production app there is port forward from host to guest control plane VM in the vagrant file
+- no special storage, can use local host nfs server (nfs-kernel-server)
+- the VMs need internet access to install Helm
+
+- add a script to run the setup, include check for prerequsits
