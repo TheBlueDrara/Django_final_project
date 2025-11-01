@@ -3,7 +3,7 @@ namespace: test
 vote_app:
   name: the-sigil-of-judgment
   serviceName: app-service
-  image: thebluedrara/faithbound-legion:v2.3
+  image: thebluedrara/faithbound-legion:v2.5
   imagePullPolicy: Always
   port: 8000
   replicas: 3
