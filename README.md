@@ -56,7 +56,7 @@ vagrant up --provider=libvirt
 
 Deploy the cluster and install helm
 ```
-cd cd/playbooks/
+cd ansible/playbooks/
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook main.yaml -i ../inventory/hosts.ini
 ```
 
