@@ -24,15 +24,28 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 
 ## Setup flow
 
+clone the project
+
+```
+git clone https://github.com/TheBlueDrara/Django_final_project.git
+```
+
 clone Offline installer project for the installer,
 > No need to follow the installers README, just do what i say
 ```
+cd Django_final_project
 git clone https://github.com/TheBlueDrara/Offline_Vanilla_k8s_Installer.git
 cd Offline_Vanilla_k8s_Installer
 cd build-script
 chmod +x makeself.sh
 ./makeself.sh
-mv k8s_installer.run ../
+mv ../k8s_installer.run ../../
+```
+
+You can now remove the Offline k8s repo
+
+```
+sudo rm -rf Offline_Vanilla_k8s_Installer
 ```
 
 Build the VMs
