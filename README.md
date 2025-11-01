@@ -14,3 +14,50 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 - Use DockerHub for my container regeistry,Bounes, Create my own registry
 - Will be used a multibranch monorepo for source control in GitHub
 
+
+
+
+## Setup flow
+
+clone Offline installer project for the installer,
+> No need to follow the installers README, just do what i say
+```
+git clone https://github.com/TheBlueDrara/Offline_Vanilla_k8s_Installer.git
+cd Offline_Vanilla_k8s_Installer
+cd build-script
+chmod +x makeself.sh
+./makeself.sh
+mv k8s_installer.run ../
+```
+
+Build the VMs
+```
+cd vagrant
+vagrant up --provider=libvirt
+```
+
+Deploy the cluster and install helm
+```
+cd cd/playbooks/
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook main.yaml -i ../inventory/hosts.ini
+```
+
+install the production helm chart
+```
+cd vagrant
+vagrant global-status
+vagrant ssh <control_plane_ID>
+git clone https://github.com/TheBlueDrara/Django_final_project.git
+cd Django_final_project/kubernetes/production_helm_chart
+helm install prod-voteapp .
+``` 
+
+To access the production app, go to your hosts webpage
+```
+http://localhost:8081
+
+or
+
+http://192.168.56.11:30081
+```
+Done
