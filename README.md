@@ -22,6 +22,33 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 - Ansible
 - Makeself
 
+
+
+## Pipeline flow
+
+Job_1
+- test env setup
+    install pylint tool
+    install docker
+
+Job_2
+- lint test for the code
+
+Job_3
+- build docker image from the new code
+- push to dockerhub
+
+Job_4
+- connect via ssh to vm
+- run helm install on vm to dploy test env using the new test image
+
+Job_5
+- run curl tests for the app
+
+Job_6
+- clean up, helm uninstall, remove local image
+
+
 ## Setup flow
 
 clone the project
@@ -78,7 +105,7 @@ or
 
 http://192.168.56.11:30081
 ```
-Done
+
 
 
 
