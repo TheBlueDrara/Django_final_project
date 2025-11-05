@@ -21,10 +21,17 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 - Libvert
 - Ansible
 - Makeself
+- 
 
 
+## ToDo
+
+- make a script to deploy infra
+- make a script to install needed dependencies56
 
 ## Pipeline flow
+
+### Test Pipelinep
 
 Job_1
 - test env setup
@@ -48,6 +55,16 @@ Job_5
 Job_6
 - clean up, helm uninstall, remove local image
 
+
+### Prod pipeline
+
+Job_1
+- runner env setup
+- install docker
+
+Job_2
+- build image
+- push to docker hub with a new tag
 
 ## Setup flow
 
