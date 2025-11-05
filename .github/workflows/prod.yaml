@@ -3,3 +3,17 @@ name: Main Pipeline
 on:
   push:
     branches: [ main ]
+
+env:
+  IMAGE_REPO: 'thebluedrara'
+  IMAGE_NAME: 'faithbound-legion'
+  IMAGE_TAG: 'v1.0.0'
+  DOCKER_IMAGE: "$IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG"
+  DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  VM_USER: "vagrant"
+  VM_IP: "192.168.56.11"
+
+jobs:
+  Runner_setup:
+    runs-on: ubuntu-latest

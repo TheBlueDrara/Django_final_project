@@ -33,3 +33,9 @@
   roles:
     - role: ../roles/namespace
 
+- name: Install Proc Helm Chart
+  hosts: control_plane
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: ../roles/install_prod_chart
