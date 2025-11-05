@@ -133,5 +133,6 @@ http://192.168.56.11:30081
 - No ingress so to reach production app there is port forward from host to guest control plane VM in the vagrant file
 - no special storage, can use local host nfs server (nfs-kernel-server)
 - the VMs need internet access to install Helm
+- docker image dynamic versions for main branch is missing 
 
 - add a script to run the setup, include check for prerequsits
