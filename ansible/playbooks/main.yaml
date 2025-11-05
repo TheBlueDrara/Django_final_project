@@ -19,9 +19,17 @@
   roles:
     - role: ../roles/helm
 
+- name: Pull Helm Charts
+  hosts: control_plane
+  become: yes
+  gather_facts: yes
+  roles:
+    - role: ../roles/helm_charts
+
 - name: Create env namespaces on k8s
   hosts: control_plane
   become: yes
   gather_facts: yes
   roles:
     - role: ../roles/namespace
+
