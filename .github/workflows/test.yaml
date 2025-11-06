@@ -18,7 +18,7 @@ env:
   SSHPASS: ${{ secrets.VM_PASSWORD }}
 
 jobs:
-  Runner_setup:
+  Test:
     runs-on: ubuntu-latest
     steps:
       - name: Clone Project Repository
@@ -35,7 +35,7 @@ jobs:
           pip install pylint
 
       - name: Install sshpass
-        run: apt-get install -y sshpass
+        run: apt install -y sshpass
 
       - name: Pylint Test
         run: echo "To Do, Add Lint Here"
