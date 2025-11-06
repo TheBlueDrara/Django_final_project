@@ -131,5 +131,14 @@ runner:v0.0.9
 - remove vagrant vms
 - delete the repo
 
+docker kill $(docker ps | awk '{print $1}')
 docker container rm $(docker ps -a | awk '{print $1}')
 docker volume rm -f gh-runner-data
+docker build -t runner:v0.0.11 -f docker/Dockerfile.runner .
+
+docker run \
+-e URL=https://github.com/TheBlueDrara/Django_final_project \
+-e TOKEN=BCG4KGO5XSPL6BPBCABFGYTJBTO4Y \
+--network host \
+-v gh-runner-data:/github \
+runner:v0.0.11
