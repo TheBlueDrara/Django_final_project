@@ -8,11 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl git sudo o
 
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
 
-RUN useradd -m runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN groupadd -f docker && useradd -m -g docker runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER runner
+
 WORKDIR /github
 
 COPY --chown=runner:runner ../github_runner /github/
-ARG TOKEN
+
 ENTRYPOINT ["/bin/bash", "-c"]
+
 CMD ["./config.sh --url ${URL} --token ${TOKEN} && ./run.sh"]
