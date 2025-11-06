@@ -135,6 +135,7 @@ runner:v0.0.9
 docker kill $(docker ps | awk '{print $1}')
 docker container rm $(docker ps -a | awk '{print $1}')
 docker volume rm -f gh-runner-data
+
 docker build -t runner:v0.0.14 -f docker/Dockerfile.runner .
 
 
@@ -145,4 +146,9 @@ docker run \
   -v gh-runner-data:/github \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --group-add $(stat -c '%g' /var/run/docker.sock) \
-  runner:v0.0.14
+  thebluedrara/github_runner:v1.0.14
+
+cd vagrant
+vagrant ssh control-plane
+
+kubectl get pods -A -w
