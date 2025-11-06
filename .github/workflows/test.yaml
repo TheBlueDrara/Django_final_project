@@ -19,7 +19,7 @@ env:
 
 jobs:
   Test_&_Merge:
-    runs-on: 
+    runs-on: self-hosted
     steps:
       - name: Clone Project Repository
         uses: actions/checkout@v4

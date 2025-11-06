@@ -130,7 +130,15 @@ If you want to config the gitlab runner to use your repo as the source you can r
 ```
 ./config.sh --url https://github.com/TheBlueDrara/Django_final_project --token <TOKEN>
 ```
-like so
+than rebuild the image
+```
+docker build -t runner:v0.0.6 -f docker/Dockerfile.runner .
+```
+
+Now run the runner
+```
+docker run -d --name gh-runner   --network host   --restart unless-stopped   -v gh-runner-data:/github   runner:v0.0.7
+```
 
 # Weaknes 
 - Part of the CI is to run the helm chart with the new built image, ( need to change the image tag in the values file )
