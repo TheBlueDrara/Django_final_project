@@ -152,3 +152,4 @@ cd vagrant
 vagrant ssh control-plane
 
 kubectl get pods -A -w
+
