@@ -69,15 +69,6 @@ jobs:
           "$VM_USER@$VM_IP" \
           "curl -fs --retry 3 --max-time 7 'http://localhost:30080/'"
 
-
-      - name: Cleanup
-        if: always()
-        run: | 
-          sshpass -e ssh -o StrictHostKeyChecking=no \
-          -o PreferredAuthentications=password -o PubkeyAuthentication=no \
-          "$VM_USER@$VM_IP" \
-          "helm uninstall test-myapp || true"
-
       - name: Create PR
         run: |
           gh pr create \
@@ -85,3 +76,11 @@ jobs:
             --head dev \
             --title "Please dear machine master accept my code offer to the machine gods" \
             --body "beep boop"
+
+      - name: Cleanup
+        if: always()
+        run: | 
+          sshpass -e ssh -o StrictHostKeyChecking=no \
+          -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+          "$VM_USER@$VM_IP" \
+          "helm uninstall test-myapp"

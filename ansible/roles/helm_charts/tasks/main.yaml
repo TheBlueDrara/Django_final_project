@@ -1,6 +1,5 @@
 - name: Pull Helm Charts
-  shell: |
-    git clone https://github.com/TheBlueDrara/Django_final_project.git
+  shell: git clone https://github.com/TheBlueDrara/Django_final_project.git
   args:
     chdir: /home/vagrant
     executable: /bin/bash

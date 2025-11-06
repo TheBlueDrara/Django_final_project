@@ -1,6 +1,6 @@
 - name: Install Prod Helm Chart
-  shell: |
-    "helm install prod-myapp /home/vagrant/Django_final_project/kubernetes/production_helm_chart" \
-    --wait --timeout 3m --atomic
+  shell: helm install prod-myapp . --wait --timeout 3m --atomic
   args:
+    chdir: /home/vagrant/Django_final_project/kubernetes/production_helm_chart
     executable: /bin/bash
+  become: false
