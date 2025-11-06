@@ -16,7 +16,7 @@ env:
   VM_USER: "vagrant"
   VM_IP: "192.168.56.11"
   SSHPASS: ${{ secrets.VM_PASSWORD }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 jobs:
   test_and_merge:
