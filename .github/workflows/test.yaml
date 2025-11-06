@@ -18,7 +18,7 @@ env:
   SSHPASS: ${{ secrets.VM_PASSWORD }}
 
 jobs:
-  Test_&_Merge:
+  test_and_merge:
     runs-on: self-hosted
     steps:
       - name: Clone Project Repository
