@@ -149,3 +149,5 @@ docker run -d --name gh-runner   --network host   --restart unless-stopped   -v 
 - docker image dynamic versions for main branch is missing 
 
 - add a script to run the setup, include check for prerequsits
+
+#
