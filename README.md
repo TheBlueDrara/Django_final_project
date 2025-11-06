@@ -26,45 +26,12 @@ for the CI, will use GitLab CI, Ansible that will deploy on a k8s cluster
 
 ## ToDo
 
-- make a script to deploy infra
-- make a script to install needed dependencies56
-
-## Pipeline flow
-
-### Test Pipelinep
-
-Job_1
-- test env setup
-    install pylint tool
-    install docker
-
-Job_2
-- lint test for the code
-
-Job_3
-- build docker image from the new code
-- push to dockerhub
-
-Job_4
-- connect via ssh to vm
-- run helm install on vm to dploy test env using the new test image
-
-Job_5
-- run curl tests for the app
-
-Job_6
-- clean up, helm uninstall, remove local image
+- make a script to deploy infra ( clone repo, make installer, create vagrant machines, run ansible playbooks, run gh-runner container)
+- make a script to install needed dependenciess
 
 
-### Prod pipeline
 
-Job_1
-- runner env setup
-- install docker
 
-Job_2
-- build image
-- push to docker hub with a new tag
 
 ## Setup flow
 
@@ -136,8 +103,15 @@ docker build -t runner:v0.0.6 -f docker/Dockerfile.runner .
 ```
 
 Now run the runner
+> Note, Remove the ```.git``` from the repo url at the end.
+
 ```
-docker run -d --name gh-runner   --network host   --restart unless-stopped   -v gh-runner-data:/github   runner:v0.0.7
+docker run \
+-e URL=https://github.com/TheBlueDrara/Django_final_project \
+-e TOKEN= \
+--network host \
+-v gh-runner-data:/github \
+runner:v0.0.9
 ```
 
 # Weaknes 
@@ -150,4 +124,12 @@ docker run -d --name gh-runner   --network host   --restart unless-stopped   -v 
 
 - add a script to run the setup, include check for prerequsits
 
-##
+## Clean UP
+- remove gh-runner container
+- delete gh-ruuner volume
+- remove gh-runner from gh
+- remove vagrant vms
+- delete the repo
+
+docker container rm $(docker ps -a | awk '{print $1}')
+docker volume rm -f gh-runner-data

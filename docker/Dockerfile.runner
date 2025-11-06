@@ -12,5 +12,6 @@ USER runner
 WORKDIR /github
 
 COPY --chown=runner:runner ../github_runner /github/
-
-CMD ["./run.sh"]
+ARG TOKEN
+ENTRYPOINT ["/bin/bash", "-c"]
+CMD ["./config.sh --url ${URL} --token ${TOKEN} && ./run.sh"]
