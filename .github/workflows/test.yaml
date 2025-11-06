@@ -18,8 +18,8 @@ env:
   SSHPASS: ${{ secrets.VM_PASSWORD }}
 
 jobs:
-  Test:
-    runs-on: ubuntu-latest
+  Test_&_Merge:
+    runs-on: 
     steps:
       - name: Clone Project Repository
         uses: actions/checkout@v4
