@@ -16,6 +16,7 @@ env:
   VM_USER: "vagrant"
   VM_IP: "192.168.56.11"
   SSHPASS: ${{ secrets.VM_PASSWORD }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   test_and_merge:
@@ -34,6 +35,9 @@ jobs:
 
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
+
+      - name: Install gh
+        run: sudo apt-get install -y gh
 
       - name: Pylint Test
         run: echo "To Do, Add Lint Here"
@@ -74,11 +78,10 @@ jobs:
           "$VM_USER@$VM_IP" \
           "helm uninstall test-myapp || true"
 
-      - name: Send Merge requests
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Please dear machine master accept my code offer to the machine gods"
-          body: "beep boop"
-          base: main
-          branch: dev
+      - name: Create PR
+        run: |
+          gh pr create \
+            --base main \
+            --head dev \
+            --title "Please dear machine master accept my code offer to the machine gods" \
+            --body "beep boop"
