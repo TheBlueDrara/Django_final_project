@@ -124,8 +124,13 @@ http://192.168.56.11:30081
 ```
 
 
+## Config gitlab runner
 
-
+If you want to config the gitlab runner to use your repo as the source you can run the config command in the gitlab_runner directory
+```
+./config.sh --url https://github.com/TheBlueDrara/Django_final_project --token <TOKEN>
+```
+like so
 
 # Weaknes 
 - Part of the CI is to run the helm chart with the new built image, ( need to change the image tag in the values file )
