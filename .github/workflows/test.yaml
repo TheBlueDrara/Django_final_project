@@ -12,7 +12,7 @@ permissions:
 env:
   IMAGE_REPO: 'thebluedrara'
   IMAGE_NAME: 'test_faithbound-legion'
-  IMAGE_TAG: 'v0.0.2'
+  IMAGE_TAG: 'latest'
   VM_USER: "vagrant"
   VM_IP: "192.168.56.11"
   SSHPASS: ${{ secrets.VM_PASSWORD }}
@@ -75,9 +75,10 @@ jobs:
           "helm uninstall test-myapp || true"
 
       - name: Send Merge requests
-        uses: repo-sync/pull-request@v2
+        uses: peter-evans/create-pull-request@v6
         with:
-          destination_branch: main
-          pr_title: "Please dear machine master accept my code offer to the machine gods"
-          pr_body: "beep boop"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Please dear machine master accept my code offer to the machine gods"
+          body: "beep boop"
+          base: main
+          branch: dev

@@ -138,10 +138,10 @@ docker volume rm -f gh-runner-data
 docker build -t runner:v0.0.14 -f docker/Dockerfile.runner .
 
 
-docker run -d \
+docker run \
   --network host \
   -e URL="https://github.com/TheBlueDrara/Django_final_project" \
-  -e TOKEN="" \
+  -e TOKEN="BCG4KGLJRJBTZ32VW3Z62KLJBTWL6" \
   -v gh-runner-data:/github \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --group-add $(stat -c '%g' /var/run/docker.sock) \
