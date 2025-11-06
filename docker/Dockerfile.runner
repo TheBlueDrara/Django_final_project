@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl git sudo o
 
 RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
 
-RUN groupadd -f docker && useradd -m -g docker runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN useradd -m runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER runner
 
