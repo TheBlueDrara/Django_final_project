@@ -5,3 +5,5 @@ Offline*
 get_helm.sh
 .vagrant
 k8s_installer.run
+github_runner
+*.tar.gz

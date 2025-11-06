@@ -1,0 +1,21 @@
+FROM ubuntu:24.04
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl git sudo openssh-client ca-certificates \
+    iproute2 iputils-ping libicu74 libkrb5-3 zlib1g libssl3 libcurl4 liblttng-ust1 && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/* && \
+    rm -rf /var/cache/apt/*
+
+RUN curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
+
+RUN useradd -m runner && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+USER runner
+
+WORKDIR /github
+
+COPY --chown=runner:runner ../github_runner /github/
+
+ENTRYPOINT ["/bin/bash", "-c"]
+
+CMD ["./config.sh --url ${URL} --token ${TOKEN} && ./run.sh"]

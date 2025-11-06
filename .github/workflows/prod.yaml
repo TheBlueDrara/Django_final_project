@@ -1,0 +1,29 @@
+name: Main Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  IMAGE_REPO: 'thebluedrara'
+  IMAGE_NAME: 'faithbound-legion'
+  IMAGE_TAG: 'v0.0.0'
+
+jobs:
+  Runner_setup:
+    runs-on: self-hosted
+    steps:
+      - name: Clone Project Repository
+        uses: actions/checkout@v4
+
+      - name: Build Image
+        run: "docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG -f docker/Dockerfile ."
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Image to Dockerhub
+        run: docker push "$IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG"

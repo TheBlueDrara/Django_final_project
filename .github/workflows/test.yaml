@@ -1,0 +1,87 @@
+name: Dev Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ dev ]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  IMAGE_REPO: 'thebluedrara'
+  IMAGE_NAME: 'test_faithbound-legion'
+  IMAGE_TAG: 'latest'
+  VM_USER: "vagrant"
+  VM_IP: "192.168.56.11"
+  SSHPASS: ${{ secrets.VM_PASSWORD }}
+  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+jobs:
+  test_and_merge:
+    runs-on: self-hosted
+    steps:
+      - name: Clone Project Repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pylint
+        run: pip install pylint
+
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
+      - name: Install gh
+        run: sudo apt-get install -y gh
+
+      - name: Pylint Test
+        run: echo "To Do, Add Lint Here"
+
+      - name: Build Image
+        run: "docker build -t $IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG -f docker/Dockerfile ."
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Image to Dockerhub
+        run: docker push "$IMAGE_REPO/$IMAGE_NAME:$IMAGE_TAG"
+
+      - name: Deploy Test Helm Chart Env
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no \
+          -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+          "$VM_USER@$VM_IP" \
+          "helm install test-myapp /home/vagrant/Django_final_project/kubernetes/testing_helm_chart \
+           --wait --timeout 3m --atomic"
+
+      - name: Test WebApp
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no \
+          -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+          "$VM_USER@$VM_IP" \
+          "curl -fs --retry 3 --max-time 7 'http://localhost:30080/'"
+
+
+      - name: Cleanup
+        if: always()
+        run: | 
+          sshpass -e ssh -o StrictHostKeyChecking=no \
+          -o PreferredAuthentications=password -o PubkeyAuthentication=no \
+          "$VM_USER@$VM_IP" \
+          "helm uninstall test-myapp || true"
+
+      - name: Create PR
+        run: |
+          gh pr create \
+            --base main \
+            --head dev \
+            --title "Please dear machine master accept my code offer to the machine gods" \
+            --body "beep boop"
