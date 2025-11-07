@@ -94,18 +94,21 @@ http://192.168.56.11:30081
 
 
 ### Build new Runner
+```
 docker build -t runner:v1.0.14 -f docker/Dockerfile.runner .
+```
 
 ### Run the Runners Image
+```
 docker run \
   --network host \
   -e URL="https://github.com/TheBlueDrara/Django_final_project" \
-  -e TOKEN="BCG4KGPQCUYY6RM2C3CHKUTJBUE52" \
+  -e TOKEN="" \
   -v gh-runner-data:/github \
   -v /var/run/docker.sock:/var/run/docker.sock \
   --group-add $(stat -c '%g' /var/run/docker.sock) \
   thebluedrara/github_runner:v1.0.14
-
+```
 
 
 ### Clean UP
@@ -118,13 +121,20 @@ docker run \
 
 
 #### Remove Runner
+```
 docker kill $(docker ps | awk '{print $1}')
 docker container rm $(docker ps -a | awk '{print $1}')
 docker volume rm -f gh-runner-data
+```
 
 #### Destroy VMs
+```
 cd vagrant
 vagrant destroy
+```
 
 ##### Remove known hosts
+```
 sudo rm ~/.ssh/known_hosts
+```
+sdsf
